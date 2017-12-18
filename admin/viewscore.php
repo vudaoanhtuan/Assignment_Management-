@@ -2,7 +2,7 @@
 	require_once("header.php");
 	require_once("../connection.php");
 	require_once("../function.php");
-?> 
+?>
 
 
 <?php
@@ -72,9 +72,9 @@
 	         $ass_name = $row["name"];
 	         echo '<tr>';
 	         echo '<td>'.$count.'</td>';
-	         echo '<td><a href="viewscore.php?ass_id='.$ass_id.'">'.$ass_name.'</a>';
-	         echo ' <a class="label label-primary" role="button" href="edit.php?ass_id='.$ass_id.'">edit</a> ';
-	         echo '</td>';
+	         echo '<td><a href="viewscore.php?ass_id='.$ass_id.'">'.$ass_name.'</a></td>';
+	         
+
 	         echo '<td><a href="subject.php?sub_id='.$subject_id.'">'.$subject_name.'</td>';
 	         echo '</tr>';
 			}

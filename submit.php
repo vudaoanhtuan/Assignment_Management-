@@ -4,6 +4,16 @@
     require_once("function.php");
     if (!isset($_GET["ass_id"])) {
         header('Location: assignment.php');
+    } else {
+        $ass= getAssignment($_GET["ass_id"]);
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+
+        $start = strtotime($ass["start_time"]);
+        $end = strtotime($ass["end_time"]);
+
+        $now = time();
+        if (!($start < $now && $now < $end))
+            header('Location: assignment.php');
     }
 
 ?>
@@ -43,13 +53,10 @@
         </div>
         <br>
         <input type="submit" class="btn btn-primary" name="up" value="Upload">
-        <input type="hidden" name="ass_id" value=<?php echo $_GET["ass_id"] ?> >
+        <input type="hidden" name="ass_id" value=<?php echo '"'. $_GET["ass_id"] .'"'; ?> >
     </div>
 
 </form>
-
-
-
 
 
 
@@ -143,11 +150,11 @@
 
                 // insert submit log to database
                 
-                $ass_id = $_GET["ass_id"];
+                $ass_id = $_POST["ass_id"];
                 $std_id = $_SESSION["student_id"];
 
 
-                $sql = "INSERT INTO submit(assignment_id, student_id, time, status) VALUES ( '$ass_id', '$std_id', '$time', 'Đang xử lí')";
+                $sql = "INSERT INTO submit(assignment_id, student_id, time, status) VALUES ( '$ass_id', '$std_id', '$time', 'w')";
 
                 mysqli_query($conn,$sql);
 

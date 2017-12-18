@@ -1,8 +1,17 @@
 <?php
 	session_start();
+	require_once("../connection.php");
 	if (!isset($_SESSION['student_id'])) {
 	     header('Location: login.php');
 	}
+	$sql = "SELECT priority FROM student WHERE id=".$_SESSION["student_id"];
+    $query = mysqli_query($conn, $sql);
+    $info = mysqli_fetch_array($query);
+
+    $priority = $info['priority'];
+
+    if ($priority < 10)
+    	header('Location: ../index.php');
 ?>
 
 <!DOCTYPE html>
@@ -42,10 +51,10 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav nav-pills">
-					<li><a href="../index.php">Home</a></li>
-					<li><a href="../subject.php">Subject</a></li>
-					<li><a href="../assignment.php">Assignment</a></li>
-					<li><a href="../score.php">Score</a></li>
+					<li><a href="index.php">Home</a></li>
+					<li><a href="subject.php">Subject</a></li>
+					<li><a href="assignment.php">Assignment</a></li>
+					<li><a href="viewscore.php">Score</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">

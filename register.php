@@ -58,6 +58,7 @@
 		$password = $_POST["password"];
 		$name = $_POST["fullname"];
 		$email = $_POST["email"];
+		$class =$_POST["class"];
 		//Kiểm tra điều kiện bắt buộc đối với các field không được bỏ trống
 		if ($username == "" || $password == "" || $name == "" || $email == "") {
 			   echo '<div class="alert alert-warning">
@@ -78,12 +79,14 @@
     					username,
     					password,
     					name,
-					    email
+					    email,
+					    class_id
     					) VALUES (
     					'$username',
     					'$password',
 					    '$name',
-    					'$email'
+    					'$email',
+    					'$class'
     					)";
 				    // thực thi câu $sql với biến conn lấy từ file connection.php
 						mysqli_query($conn,$sql);
@@ -145,6 +148,25 @@
                                     <div class="col-md-9">
                                         <input type="text" class="form-control" name="email" placeholder="Email Address">
                                     </div>
+                                </div>
+
+                                <div class="form-group">
+                                	<label class="col-md-3 control-label">Class</label>
+                                	<div class="col-md-9 ">
+	                                	<select class="form-control " name="class">
+	                                		<?php
+	                                			$sql = "SELECT * FROM class";
+	                                			$query = mysqli_query($conn, $sql);
+	                                			$row = mysqli_fetch_array($query);
+	                                			echo '<option selected value="'.$row["id"].'">'.$row['name'].'</option>';
+	                                			while ($row = mysqli_fetch_array($query)) {
+	                                				echo '<option value="'.$row["id"].'">'.$row['name'].'</option>';
+	                                			}
+
+	                                		?>
+
+	                                	</select>
+	                                </div>
                                 </div>
                                     
 
